@@ -15,7 +15,11 @@
     "48": "icons/icon48.png",
     "128": "icons/icon128.png"
   },
-  
+  "browser_specific_settings": {
+  "gecko": {
+    "id": "{a6f0a0e4-d631-40e7-8754-06b5eb0d1224}"
+  }
+},
   "manifest_version": 3,
-  "version": "0.0.0"
+  "version": "0.0.1"
 }
