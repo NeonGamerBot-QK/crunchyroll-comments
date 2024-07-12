@@ -1,0 +1,21 @@
+{
+    "name": "Crunchyroll Comments",
+    "description": "An extension which has a 3d party version of Crunchyroll comments #bringbackcrunchyrollcomments",
+    "content_scripts": [
+    {
+      "matches": ["*://*.crunchyroll.com/watch/*"],
+      "js": [
+        "insert-comments.js"],
+      "css": ["comments.css", "comments2.css"]
+    }
+  ],
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  
+  "manifest_version": 3,
+  "version": "0.0.0"
+}
