@@ -1,3 +1,4 @@
+[![wakatime](https://wakatime.com/badge/user/018eed1d-6093-4f51-9fca-7863b7a1ac97/project/f77789c3-1ff5-4730-b6d2-e63fbb60fa8b.svg)](https://wakatime.com/badge/user/018eed1d-6093-4f51-9fca-7863b7a1ac97/project/f77789c3-1ff5-4730-b6d2-e63fbb60fa8b)
 # Crunchyroll Comments/Reviews
 ![screenshot](assets/screenshot.png)
 An extension that adds crunchyroll comments functinality back.
@@ -32,6 +33,10 @@ The data being transfered when your creating when a comment is:
 - ID (crunchyroll acc identifier) (CANNOT be used to login/hack)
 - Username (for comments)
 - Avatar (for comments)
-
+## Links
+[Chrome ext](https://chromewebstore.google.com/detail/fkmpooolcpndmjolmlilghjlejcmfhlk/preview?hl=en&authuser=0)
+[firefox ext](https://addons.mozilla.org/en-US/firefox/addon/crunchyroll-comments/)
+[My site](https://saahild.com)
+[Support](mailto:neon@saahild.com)
 ## 💰 You can help me by Donating
   [![PayPal](https://img.shields.io/badge/PayPal-00457C?style=for-the-badge&logo=paypal&logoColor=white)](https://paypal.me/duttafamily) [![Ko-Fi](https://img.shields.io/badge/Ko--fi-F16061?style=for-the-badge&logo=ko-fi&logoColor=white)](https://ko-fi.com/saahil) 
