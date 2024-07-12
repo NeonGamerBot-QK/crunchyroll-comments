@@ -20,6 +20,16 @@
     "id": "{a6f0a0e4-d631-40e7-8754-06b5eb0d1224}"
   }
 },
+"background": {
+  "service_worker": "background.js",
+  "scripts": ["background.js"],
+  "type": "module"
+},
+"action": {
+  "default_icon": "icons/icon32.png",
+  "default_title": "Donate",
+  "default_popup": "popup.html"
+},
   "manifest_version": 3,
   "version": "0.0.1"
 }
