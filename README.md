@@ -6,7 +6,7 @@ This is an extension which replicates the comments on crunchyroll for how they u
 This is still a WIP and more features are on the way.
 
 ## More features
-- Reviews
+- Reviews (most likely in v1.0.0)
 - Replying to a comment
 - liking a comment
 - Disliking a comment
@@ -15,7 +15,7 @@ This is still a WIP and more features are on the way.
 - Reporting a Comment
 - Custom comment badges
 - comment automoderation (malicous viruses, spam, etc)
-- safe mode (client size only filter)
+- ~~safe mode (client size only filter)~~
 - ~~Episode syntax highlighting (ex: 00:01 jumps you to the first second of the video) (maybe comming)~~
 
 ## Helpful links
@@ -30,7 +30,7 @@ This is still a WIP and more features are on the way.
 ## Privacy
 this extension connects only to `api.saahild.com`. 
 The data being transfered when your creating when a comment is:
-- ID (crunchyroll acc identifier) (CANNOT be used to login/hack)
+- ID (crunchyroll acc identifier) (CANNOT be used to login/hack) *note: this will be used later to make sure u can edit/delete your own comments so i would recommend not sharing it*
 - Username (for comments)
 - Avatar (for comments)
 ## Links

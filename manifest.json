@@ -22,6 +22,12 @@
     "id": "{a6f0a0e4-d631-40e7-8754-06b5eb0d1224}"
   }
 },
+"options_page": "options.html",
+"options_ui": {
+  "page": "options.html",
+  "open_in_tab": true
+},
+"permissions": ["storage"],
 "background": {
   "service_worker": "background.js",
   "scripts": ["background.js"],

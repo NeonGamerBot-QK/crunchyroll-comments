@@ -1,4 +1,6 @@
 ;(async () => {
+const instance = typeof chrome === 'undefined' ? browser : chrome
+
 // console.log(dayjs().from(dayjs('2008-04-04')))
 // to work with firefox bundle it
 try {
@@ -46,7 +48,7 @@ if(window.self !== window.top) {
  
 
         window.addEventListener('message', e => {
-            console.debug(e)
+            // console.debug(e)
             if(typeof e == 'string') return;
             const key = e.message ? 'message' : 'data';
             const data = e[key];
@@ -230,7 +232,7 @@ commentDetails.append(innerDiv)
 commentDiv.append(commentDetails)
 return commentDiv
     }
-    setTimeout(() => {
+    setTimeout(async () => {
 
 const div = document.createElement('div')
 // const urlParams = new URLSearchParams(location.search)
@@ -265,9 +267,28 @@ if(ep_data.length == 0) {
     div.innerText = `Looks like theres no comments `
 addCommentsToMe.append(div)
 } else {
-    ep_data.forEach(e => {
-    addCommentsToMe.append(createCommentEl(e))
-    })
+    const safeModeQ = await instance.storage.sync.get("safeMode").then(v => v.safeMode)
+    if(safeModeQ) {
+        console.log('safe mode enabled')
+        await Promise.all(ep_data
+        .map(async e => {
+            return  {
+                ...e, 
+                safeMode: !(await instance.runtime.sendMessage({ cmd: 'check_content', msg: e.content }))
+            }
+            // addCommentsToMe.append(createCommentEl(e))
+            })).then(e => {
+                const filtered = e.filter(f => f.safeMode)
+commentsCount.innerText = "{comments_count} Comments".replace("{comments_count}", filtered.length)
+                filtered.forEach(e => {
+                    addCommentsToMe.append(createCommentEl(e))
+                    })
+            })
+    } else {
+        ep_data.forEach(e => {
+            addCommentsToMe.append(createCommentEl(e))
+            })
+    }
 }
 // addCommentsToMe.append(createCommentEl(EXAMPLE_MESSAGE_PAYLOAD_GEN()))
 // addCommentsToMe.append(createCommentEl(EXAMPLE_MESSAGE_PAYLOAD_GEN()))
@@ -280,7 +301,7 @@ commentSectionDiv.append(commentsHeader)
 commentSectionDiv.append(commentWrapper)
 innerDiv.append(commentSectionDiv)
 div.append(innerDiv)
-console.log(parent)
+// console.log(parent)
 setInterval(() => {
 const parent = document.getElementsByClassName('body-wrapper')[0]
 if(!parent) return;
