@@ -1,3 +1,4 @@
+;(async () => {
 // console.log(dayjs().from(dayjs('2008-04-04')))
 // to work with firefox bundle it
 try {
@@ -7,6 +8,12 @@ dayjs.extend(window.dayjs_plugin_relativeTime)
 
 } catch(e) {
     console.error('caught')
+}
+const timestampRegex = /^(?:\d+(?::[0-5][0-9]:[0-5][0-9])?|[0-5]?[0-9]:[0-5][0-9])$/gm
+const parseTimestamp = timestamp => {
+    if(!timestampRegex.test(timestamp)) return 0;
+    const [mins, sec] = timestamp.split(':')
+    return (parseInt(mins) * 60) + parseInt(sec)
 }
 ;(() => {
 let s=1000;let m=s*60;let h=m*60;let d=h*24;let w=d*7;let y=d*365.25;window.ms=function(val,options){options=options||{};let type=typeof val;if(type==='string'&&val.length>0){return parse(val)}else if(type==='number'&&isFinite(val)){return options.long?fmtLong(val):fmtShort(val)}throw new Error('val is not a non-empty string or a valid number. val='+JSON.stringify(val))};function parse(str){str=String(str);if(str.length>100){return}let match=/^(-?(?:\d+)?\.?\d+) *(milliseconds?|msecs?|ms|seconds?|secs?|s|minutes?|mins?|m|hours?|hrs?|h|days?|d|weeks?|w|years?|yrs?|y)?$/i.exec(str);if(!match){return}let n=parseFloat(match[1]);let type=(match[2]||'ms').toLowerCase();switch(type){case 'years':case 'year':case 'yrs':case 'yr':case 'y':return n*y;case 'weeks':case 'week':case 'w':return n*w;case 'days':case 'day':case 'd':return n*d;case 'hours':case 'hour':case 'hrs':case 'hr':case 'h':return n*h;case 'minutes':case 'minute':case 'mins':case 'min':case 'm':return n*m;case 'seconds':case 'second':case 'secs':case 'sec':case 's':return n*s;case 'milliseconds':case 'millisecond':case 'msecs':case 'msec':case 'ms':return n;default:return undefined}}function fmtShort(ms){let msAbs=Math.abs(ms);if(msAbs>=d){return Math.round(ms/d)+'d'}if(msAbs>=h){return Math.round(ms/h)+'h'}if(msAbs>=m){return Math.round(ms/m)+'m'}if(msAbs>=s){return Math.round(ms/s)+'s'}return ms+'ms'}function fmtLong(ms){let msAbs=Math.abs(ms);if(msAbs>=d){return plural(ms,msAbs,d,'day')}if(msAbs>=h){return plural(ms,msAbs,h,'hour')}if(msAbs>=m){return plural(ms,msAbs,m,'minute')}if(msAbs>=s){return plural(ms,msAbs,s,'second')}return ms+' ms'}function plural(ms,msAbs,n,name){let isPlural=msAbs>=n*1.5;return Math.round(ms/n)+' '+name+(isPlural?'s':'')}
@@ -34,13 +41,91 @@ avatar.innerHTML = `
 <div class="content-image--3na7E content-image--is-background-type-one--1LQDe avatar__image--Y0mTL"><figure class="content-image__figure--7vume"><picture><img class="progressive-image-base__fade--Nrn20 progressive-image-base__fade--is-ready--dMxKu content-image__image--7tGlg" loading="eager" src="${user_data.avatar}" alt="User avatar."></picture></figure></div>`
     return avatar;
 }
+if(window.self !== window.top) {
+    window.onload = () => {
+ 
+
+        window.addEventListener('message', e => {
+            console.debug(e)
+            if(typeof e == 'string') return;
+            const key = e.message ? 'message' : 'data';
+            const data = e[key];
+            // funfact all messages under data are video.js
+    //    if(key !== 'data') {
+    //     alert(key)
+    //     alert(data)
+    //    }
+    const v = document.querySelector('video')
+
+    switch(data.cmd) {
+    case 'speed_to':
+            v.currentTime = data.time
+    break;
+}
+            // ...
+        },false);
+        
+        
+    
+        }
+return;
+    } 
+const speed_up = point => {
+    const el = document.getElementsByTagName('iframe')[0] || document.querySelector("#player0") || {}
+    el.scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" })
+    if(document.getElementsByClassName('css-9pa8cd')[1]) document.getElementsByClassName('css-9pa8cd')[1].click()
+    document.getElementsByTagName('iframe')[0].contentWindow. postMessage({ cmd: 'speed_to', time: point },"*");
+}
+window.speed_up_to = speed_up
 function createCommentBody(parent, body) {
 const noClassDiv = document .createElement('div') //called this because its class on site is class=""
 const innerDiv0 = document.createElement('div')
 innerDiv0.className = "expandable-section__wrapper--G-ttI"
 const p = document.createElement('p')
 p.className = "text--gq6o- text--is-l--iccTo expandable-section__text---00oG"
+// p.style.paddingRight = "2px"
+// p.style.paddingLeft = "2px"
 p.innerText = body
+const timestamps = []
+p.innerHTML.split(' ').forEach((e) => {
+    if(e.includes(':') && !isNaN(e[0])) { 
+        timestamps.push(e)
+    }  
+})
+ timestamps.forEach(timestamp => {
+    const splits = p.innerHTML.split(timestamp)
+const before = splits[0]
+const after = splits[1]
+        const a = document.createElement('a')
+        a.className = "cr-timestamp-link"
+        a.onclick = () => speed_up(parseTimestamp(timestamp))
+        a.innerText = timestamp
+        p.innerHTML = ""
+        p.append(before, a, after)
+})
+//  const splits = p.innerHTML.split(' ').map(e => {
+//     console.log(e.trim()[0])
+//     if(e.includes(':') && !isNaN(e[0])) {
+//         const a = document.createElement('a')
+//         a.className = "cr-timestamp-link"
+//         a.onclick = () => speed_up(parseTimestamp(e))
+//         a.innerText = e
+//         return a
+//         // return `<a class="cr-timestamp-link" onclick="window.speed_up_to(${parseTimestamp(e)})">${e}</a>`
+//     }  else {
+//         const span = document.createElement('span')
+//         span.innerText = " "+ e 
+//         return span
+//     }
+// })
+// p.innerHTML = ""
+// splits.forEach((el) => {
+//     if(el && el.style) {
+//         el.style.marginRight = "2px"
+//     el.style.marginLeft = "2px"
+//     }
+//     p.append(el)
+// })
 innerDiv0.append(p)
 noClassDiv.append(innerDiv0)
 if(parent) {
@@ -49,7 +134,7 @@ if(parent) {
     return noClassDiv;
 }
 }
-window.addEventListener('load', async () => {
+ ;(async () => {
 const url = new URL(location.href)
 const [ep_id, ep_name] = url.pathname.split('/').slice(1)
 const userId = JSON.parse(localStorage.ajs_user_id) // user id will be used to identify user on comments 
@@ -206,4 +291,5 @@ parent.append(div)
 }
 }, 20)
     }, 250)
-})
+})()
+})()

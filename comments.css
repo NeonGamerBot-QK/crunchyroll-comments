@@ -13530,3 +13530,6 @@ fyi keep :root
   .comments-wrapper-narrow {
     min-width:49.125rem
   }
+  .cr-timestamp-link {
+    cursor: pointer;
+  }

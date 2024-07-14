@@ -3,10 +3,12 @@
     "description": "An extension which has a 3d party version of Crunchyroll comments #bringbackcrunchyrollcomments",
     "content_scripts": [
     {
-      "matches": ["*://*.crunchyroll.com/watch/*"],
+      "matches": ["*://*.crunchyroll.com/*"],
       "js": [
         "insert-comments.js"],
-      "css": ["comments.css", "comments2.css"]
+      "css": ["comments.css", "comments2.css"],
+      "run_at": "document_end",
+      "all_frames": true
     }
   ],
   "icons": {

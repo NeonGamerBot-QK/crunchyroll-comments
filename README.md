@@ -16,7 +16,7 @@ This is still a WIP and more features are on the way.
 - Custom comment badges
 - comment automoderation (malicous viruses, spam, etc)
 - safe mode (client size only filter)
-- Episode syntax highlighting (ex: 00:01 jumps you to the first second of the video) (maybe comming)
+- ~~Episode syntax highlighting (ex: 00:01 jumps you to the first second of the video) (maybe comming)~~
 
 ## Helpful links
 [Reddit post about removal of comments](https://www.reddit.com/r/Crunchyroll/comments/1dy380k/crunchyroll_removing_comments_reviews_etc/?utm_name=web3xcss)
