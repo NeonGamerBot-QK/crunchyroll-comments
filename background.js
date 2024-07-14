@@ -7,25 +7,25 @@ instance.runtime.onInstalled.addListener(function (object) {
   // instance.runtime.openOptionsPage()
 })
 
-;( async () => {
-  const rawRegexes = await(await fetch(instance.runtime.getURL('regex-filter.txt'))).text()
+;(async () => {
+  const rawRegexes = await (await fetch(instance.runtime.getURL('regex-filter.txt'))).text()
   const wordfilter = await (await (await fetch(instance.runtime.getURL('wordfilter.txt'))).text()).split('\n')
   instance.runtime.onMessage.addListener((ev) => {
     console.log(ev)
     const msg = ev.msg
-    switch(ev.cmd) {
-      case "check_content":
+    switch (ev.cmd) {
+      case 'check_content':
         const regexes = rawRegexes.split('\n').map(r => new RegExp(r))
-        if(wordfilter.some(e => msg.includes(e) || msg.toLowerCase().includes(e.toLowerCase())) || regexes.some(e => e.test(msg))) {
+        if (wordfilter.some(e => msg.includes(e) || msg.toLowerCase().includes(e.toLowerCase())) || regexes.some(e => e.test(msg))) {
           return Promise.resolve(true)
         } else {
-          return Promise.resolve(false);
+          return Promise.resolve(false)
         }
-      break;
-      default: 
-      return false;
-      break;
+        break
+      default:
+        return false
+        break
     }
-    return false;
+    return false
   })
 })()
