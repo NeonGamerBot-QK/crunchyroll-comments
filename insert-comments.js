@@ -184,7 +184,7 @@
       div.append(submitButton)
       parent.append(div)
     }
-    function createCommentEl ({ user_data, content, created_at}) {
+    function createCommentEl ({ user_data, content, created_at, badges }) {
       const commentDiv = document.createElement('div')
       commentDiv.className = 'comment-wrapper'
 // todo erc-comment-group
@@ -202,7 +202,7 @@
 // sig first
       const commenterUsername = document.createElement('div')
       commenterUsername.className = 'comment__username--dNChO'
-      commenterUsername.innerHTML = `<h5 class="text--gq6o- text--is-semibold--AHOYN text--is-l--iccTo username--06KaN">${user_data.name}</h5>`
+      commenterUsername.innerHTML = `<h5 class="text--gq6o- text--is-semibold--AHOYN text--is-l--iccTo username--06KaN">${user_data.name} ${badges.map(b => `<span class='cr-badge'>${b.name}</span>`).join(' ')}</h5>`
       const commentDate = document.createElement('span')
       commentDate.className = 'text--gq6o- text--is-m--pqiL- comment__publication-date--1Enil'
       try {

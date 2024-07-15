@@ -13,10 +13,10 @@ This is still a WIP and more features are on the way.
 - edit comment
 - delete comment
 - Reporting a Comment
-- Custom comment badges
+- ~~Custom comment badges~~
 - comment automoderation (malicous viruses, spam, etc)
-- ~~safe mode (client size only filter)~~
-- ~~Episode syntax highlighting (ex: 00:01 jumps you to the first second of the video) (maybe comming)~~
+- ~~safe mode (client size only filter)~~ (included in v0.1.0)
+- ~~Episode syntax highlighting (ex: 00:01 jumps you to the first second of the video) (maybe comming)~~ (included in v0.1.0)
 
 ## Helpful links
 [Reddit post about removal of comments](https://www.reddit.com/r/Crunchyroll/comments/1dy380k/crunchyroll_removing_comments_reviews_etc/?utm_name=web3xcss)

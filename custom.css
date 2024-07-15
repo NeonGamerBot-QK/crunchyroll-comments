@@ -1,0 +1,11 @@
+/* all custom made css and not copied */
+.cr-badge {
+    background-color:  #F47521;
+    color: white;
+    padding: 4px 8px;
+    text-align: center;
+    border-radius: 5px;
+  }
+  .cr-timestamp-link {
+    cursor: pointer;
+  }

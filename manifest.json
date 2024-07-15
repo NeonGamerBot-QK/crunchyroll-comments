@@ -6,7 +6,7 @@
       "matches": ["*://*.crunchyroll.com/*"],
       "js": [
         "insert-comments.js"],
-      "css": ["comments.css", "comments2.css"],
+      "css": ["custom.css", "comments.css", "comments2.css"],
       "run_at": "document_end",
       "all_frames": true
     }
