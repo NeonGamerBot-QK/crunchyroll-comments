@@ -38,5 +38,8 @@ The data being transfered when your creating when a comment is:
 [firefox ext](https://addons.mozilla.org/en-US/firefox/addon/crunchyroll-comments/)
 [My site](https://saahild.com)
 [Support](mailto:neon@saahild.com)
+## Stars
+[![Stargazers repo roster for @NeonGamerBot-QK/crunchyroll-comments](https://reporoster.com/stars/NeonGamerBot-QK/crunchyroll-comments)](https://github.com/NeonGamerBot-QK/crunchyroll-comments/stargazers)
+
 ## 💰 You can help me by Donating
   [![PayPal](https://img.shields.io/badge/PayPal-00457C?style=for-the-badge&logo=paypal&logoColor=white)](https://paypal.me/duttafamily) [![Ko-Fi](https://img.shields.io/badge/Ko--fi-F16061?style=for-the-badge&logo=ko-fi&logoColor=white)](https://ko-fi.com/saahil) 

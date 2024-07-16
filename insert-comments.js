@@ -71,7 +71,7 @@
     if (document.getElementsByClassName('css-9pa8cd')[1]) document.getElementsByClassName('css-9pa8cd')[1].click()
     document.getElementsByTagName('iframe')[0].contentWindow.postMessage({ cmd: 'speed_to', time: point }, '*')
   }
-  window.speed_up_to = speed_up
+  // window.speed_up_to = speed_up
   function createCommentBody (parent, body) {
     const noClassDiv = document.createElement('div') // called this because its class on site is class=""
     const innerDiv0 = document.createElement('div')
@@ -129,7 +129,9 @@
       return noClassDiv
     }
   }
-  ;(async () => {
+  const div = document.createElement('div')
+
+  async function runSystem() {
     const url = new URL(location.href)
     const [ep_id, ep_name] = url.pathname.split('/').slice(1)
     const userId = JSON.parse(localStorage.ajs_user_id) // user id will be used to identify user on comments
@@ -184,7 +186,7 @@
       div.append(submitButton)
       parent.append(div)
     }
-    function createCommentEl ({ user_data, content, created_at, badges }) {
+    function createCommentEl ({ user_data, content, created_at, badges , is_liked, likes, dislikes, is_disliked }) {
       const commentDiv = document.createElement('div')
       commentDiv.className = 'comment-wrapper'
 // todo erc-comment-group
@@ -197,6 +199,18 @@
 // todo comment actions
       const commentSignature = document.createElement('div')
       const commentBody = document.createElement('div')
+      const commentActions = document.createElement('ul')
+      commentActions.className = "comment-actions--jMKiu"
+      const likeEl = document.createElement('li')
+      const likeBtn = document.createElement('button')
+      likeEl.className = "comment-actions__item-wrapper--CbVBD"
+      likeBtn.className = "call-to-action--PEidl call-to-action--is-s--xFu35 comment-actions__item--5xkC3"
+      likeBtn.innerHTML = `<svg ${is_liked ? 'style="color: #F47521;"' : ''} class="episode-rate-action__icon--DEMWd" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" data-t="thumbs-up-svg" aria-labelledby="thumbs-up-svg" aria-hidden="true" role="img"><title id="thumbs-up-svg">Like this</title><path d="M7 20h12v-4c0-.155.036-.309.105-.447l1.33-2.658c.28-.561.28-1.229 0-1.79L19.382 9H14a1 1 0 0 1-1-1V4c0-1.103-.897-2-2-2h-1v4.879a3.973 3.973 0 0 1-1.172 2.828l-.021.021L7 11.432V20zm12 2H6a1 1 0 0 1-1-1V11a1 1 0 0 1 .314-.728l2.109-1.989C7.795 7.906 8 7.408 8 6.879V1a1 1 0 0 1 1-1h2c2.206 0 4 1.794 4 4v3h4.382c.764 0 1.449.424 1.789 1.106l1.053 2.105a4.02 4.02 0 0 1 0 3.578L21 16.236V20c0 1.103-.897 2-2 2zm-17-.063a1 1 0 0 1-1-1V11a1 1 0 0 1 2 0v9.938a1 1 0 0 1-1 1z"></path></svg> ${likes || 0}`
+      const dislikeEl = document.createElement('li')
+      const dislikeBtn = document.createElement('button')
+      dislikeEl.className = "comment-actions__item-wrapper--CbVBD"
+      dislikeBtn.className = "call-to-action--PEidl call-to-action--is-s--xFu35 comment-actions__item--5xkC3"
+      dislikeBtn.innerHTML = `<svg style="transform: rotate(180deg);${is_disliked ? 'color: #F47521;' : ''}" class="episode-rate-action__icon--DEMWd" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" data-t="thumbs-up-svg" aria-labelledby="thumbs-up-svg" aria-hidden="true" role="img"><title id="thumbs-up-svg">Like this</title><path d="M7 20h12v-4c0-.155.036-.309.105-.447l1.33-2.658c.28-.561.28-1.229 0-1.79L19.382 9H14a1 1 0 0 1-1-1V4c0-1.103-.897-2-2-2h-1v4.879a3.973 3.973 0 0 1-1.172 2.828l-.021.021L7 11.432V20zm12 2H6a1 1 0 0 1-1-1V11a1 1 0 0 1 .314-.728l2.109-1.989C7.795 7.906 8 7.408 8 6.879V1a1 1 0 0 1 1-1h2c2.206 0 4 1.794 4 4v3h4.382c.764 0 1.449.424 1.789 1.106l1.053 2.105a4.02 4.02 0 0 1 0 3.578L21 16.236V20c0 1.103-.897 2-2 2zm-17-.063a1 1 0 0 1-1-1V11a1 1 0 0 1 2 0v9.938a1 1 0 0 1-1 1z"></path></svg> ${dislikes || 0}`
       commentSignature.className = 'comment__signature--ViT7H'
       commentBody.className = 'comment__body--PmW4R'
 // sig first
@@ -215,17 +229,23 @@
       createCommentBody(commentBody, content)
       commentSignature.append(commenterUsername)
       commentSignature.append(commentDate)
+      likeEl.append(likeBtn)
+      dislikeEl.append(dislikeBtn)
+      commentActions.append(likeEl)
+      commentActions.append(dislikeEl)
       innerDivContent.append(commentSignature)
+
 // innerDivContent.append(commentSignature)
       innerDivContent.append(commentBody)
+    innerDivContent.append(commentActions)
       innerDiv.append(avatar)
       innerDiv.append(innerDivContent)
       commentDetails.append(innerDiv)
       commentDiv.append(commentDetails)
       return commentDiv
     }
-    setTimeout(async () => {
-      const div = document.createElement('div')
+
+    // setTimeout(async () => {
 // const urlParams = new URLSearchParams(location.search)
 // if(!url.pathname.includes('/watch/')) return;
       div.className = 'commenting-wrapper'
@@ -293,15 +313,27 @@
       innerDiv.append(commentSectionDiv)
       div.append(innerDiv)
 // console.log(parent)
-      setInterval(() => {
-        const parent = document.getElementsByClassName('body-wrapper')[0]
-        if (!parent) return
-        if (parent && !document.getElementsByClassName('commenting-wrapper')[0]) {
-          parent.append(div)
-        } else {
-          clearInterval(this)
-        }
-      }, 20)
-    }, 250)
-  })()
+      
+    // }, 0)
+  } 
+  let last_url = location.href.toString()
+  setInterval(() => {
+    let urlWasChanged = location.href !== last_url
+if(document.getElementsByClassName('commenting-wrapper')[0] && urlWasChanged) {
+  last_url = location.href.toString()
+  div.innerHTML = ""
+try {
+  document.getElementsByClassName('commenting-wrapper')[0].remove()
+} catch(e){}
+  runSystem()
+}else {
+  const parent = document.getElementsByClassName('body-wrapper')[0]
+    if (!parent) return
+    if (parent && !document.getElementsByClassName('commenting-wrapper')[0]) {
+      parent.append(div)
+    }
+}
+  
+  }, 20)
+  runSystem()
 })()
