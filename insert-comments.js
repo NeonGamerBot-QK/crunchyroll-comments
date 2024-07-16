@@ -191,7 +191,7 @@
       parent.append(div)
     }
     function createCommentEl (payload = EXAMPLE_MESSAGE_PAYLOAD_GEN()) {
-      let { user_data, content, created_at, badges, is_liked, likes, dislikes, is_disliked, id, has_liked } = payload
+      let { user_data, content, created_at, badges, is_liked, likes, dislikes, has_disliked, id, has_liked } = payload
       console.log(payload)
       const commentDiv = document.createElement('div')
       commentDiv.className = 'comment-wrapper'
@@ -240,7 +240,28 @@ likes = n_likes
       const dislikeBtn = document.createElement('button')
       dislikeEl.className = 'comment-actions__item-wrapper--CbVBD'
       dislikeBtn.className = 'call-to-action--PEidl call-to-action--is-s--xFu35 comment-actions__item--5xkC3'
-      dislikeBtn.innerHTML = `<svg style="transform: rotate(180deg);${is_disliked ? 'color: #F47521;' : ''}" class="episode-rate-action__icon--DEMWd" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" data-t="thumbs-up-svg" aria-labelledby="thumbs-up-svg" aria-hidden="true" role="img"><title id="thumbs-up-svg">Like this</title><path d="M7 20h12v-4c0-.155.036-.309.105-.447l1.33-2.658c.28-.561.28-1.229 0-1.79L19.382 9H14a1 1 0 0 1-1-1V4c0-1.103-.897-2-2-2h-1v4.879a3.973 3.973 0 0 1-1.172 2.828l-.021.021L7 11.432V20zm12 2H6a1 1 0 0 1-1-1V11a1 1 0 0 1 .314-.728l2.109-1.989C7.795 7.906 8 7.408 8 6.879V1a1 1 0 0 1 1-1h2c2.206 0 4 1.794 4 4v3h4.382c.764 0 1.449.424 1.789 1.106l1.053 2.105a4.02 4.02 0 0 1 0 3.578L21 16.236V20c0 1.103-.897 2-2 2zm-17-.063a1 1 0 0 1-1-1V11a1 1 0 0 1 2 0v9.938a1 1 0 0 1-1 1z"></path></svg> ${dislikes || 0}`
+      dislikeBtn.innerHTML = `<svg style="transform: rotate(180deg);${has_disliked ? 'color: #F47521;' : ''}" class="episode-rate-action__icon--DEMWd" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" data-t="thumbs-up-svg" aria-labelledby="thumbs-up-svg" aria-hidden="true" role="img"><title id="thumbs-up-svg">Like this</title><path d="M7 20h12v-4c0-.155.036-.309.105-.447l1.33-2.658c.28-.561.28-1.229 0-1.79L19.382 9H14a1 1 0 0 1-1-1V4c0-1.103-.897-2-2-2h-1v4.879a3.973 3.973 0 0 1-1.172 2.828l-.021.021L7 11.432V20zm12 2H6a1 1 0 0 1-1-1V11a1 1 0 0 1 .314-.728l2.109-1.989C7.795 7.906 8 7.408 8 6.879V1a1 1 0 0 1 1-1h2c2.206 0 4 1.794 4 4v3h4.382c.764 0 1.449.424 1.789 1.106l1.053 2.105a4.02 4.02 0 0 1 0 3.578L21 16.236V20c0 1.103-.897 2-2 2zm-17-.063a1 1 0 0 1-1-1V11a1 1 0 0 1 2 0v9.938a1 1 0 0 1-1 1z"></path></svg> ${dislikes || 0}`
+      dislikeBtn.onclick = () => {
+        // fetch('https:/')
+        fetch(`https://api.saahild.com/api/crunchyroll/comments/${ep_id}/${ep_name}/${id || created_at}/dislike`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'x-user-id': userId
+          },
+        }).then(r => r.json()).then(({ message }) => {
+          let n_has_liked = !has_disliked
+          let n_likes = n_has_liked ? dislikes + 1 : likes - 1
+          if(has_liked) {
+            dislikeBtn.style.color = ""
+          } else {
+            dislikeBtn.style.color = "#F47521"
+          }
+      dislikeBtn.innerHTML = `<svg style="transform: rotate(180deg);${has_disliked ? 'color: #F47521;' : ''}" class="episode-rate-action__icon--DEMWd" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" data-t="thumbs-up-svg" aria-labelledby="thumbs-up-svg" aria-hidden="true" role="img"><title id="thumbs-up-svg">Like this</title><path d="M7 20h12v-4c0-.155.036-.309.105-.447l1.33-2.658c.28-.561.28-1.229 0-1.79L19.382 9H14a1 1 0 0 1-1-1V4c0-1.103-.897-2-2-2h-1v4.879a3.973 3.973 0 0 1-1.172 2.828l-.021.021L7 11.432V20zm12 2H6a1 1 0 0 1-1-1V11a1 1 0 0 1 .314-.728l2.109-1.989C7.795 7.906 8 7.408 8 6.879V1a1 1 0 0 1 1-1h2c2.206 0 4 1.794 4 4v3h4.382c.764 0 1.449.424 1.789 1.106l1.053 2.105a4.02 4.02 0 0 1 0 3.578L21 16.236V20c0 1.103-.897 2-2 2zm-17-.063a1 1 0 0 1-1-1V11a1 1 0 0 1 2 0v9.938a1 1 0 0 1-1 1z"></path></svg> ${n_likes || 0}`
+has_disliked = n_has_liked
+dislikes = n_likes
+        })
+      }
       commentSignature.className = 'comment__signature--ViT7H'
       commentBody.className = 'comment__body--PmW4R'
 // sig first
