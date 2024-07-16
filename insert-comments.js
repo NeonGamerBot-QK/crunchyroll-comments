@@ -131,7 +131,7 @@
   }
   const div = document.createElement('div')
 
-  async function runSystem() {
+  async function runSystem () {
     const url = new URL(location.href)
     const [ep_id, ep_name] = url.pathname.split('/').slice(1)
     const userId = JSON.parse(localStorage.ajs_user_id) // user id will be used to identify user on comments
@@ -179,14 +179,14 @@
           body: JSON.stringify({
             user_data: info, content: textarea.value
           })
-        }).then(r => r.json()).then(({ message, errors}) => alert(message.includes('NEW') ? `Message sent!` : `${message}${errors ? '\n'+errors.join('\n') : ''}`))
+        }).then(r => r.json()).then(({ message, errors}) => alert(message.includes('NEW') ? `Message sent!` : `${message}${errors ? '\n' + errors.join('\n') : ''}`))
       }
       div.append(h3)
       div.append(textarea)
       div.append(submitButton)
       parent.append(div)
     }
-    function createCommentEl ({ user_data, content, created_at, badges , is_liked, likes, dislikes, is_disliked }) {
+    function createCommentEl ({ user_data, content, created_at, badges, is_liked, likes, dislikes, is_disliked }) {
       const commentDiv = document.createElement('div')
       commentDiv.className = 'comment-wrapper'
 // todo erc-comment-group
@@ -200,16 +200,16 @@
       const commentSignature = document.createElement('div')
       const commentBody = document.createElement('div')
       const commentActions = document.createElement('ul')
-      commentActions.className = "comment-actions--jMKiu"
+      commentActions.className = 'comment-actions--jMKiu'
       const likeEl = document.createElement('li')
       const likeBtn = document.createElement('button')
-      likeEl.className = "comment-actions__item-wrapper--CbVBD"
-      likeBtn.className = "call-to-action--PEidl call-to-action--is-s--xFu35 comment-actions__item--5xkC3"
+      likeEl.className = 'comment-actions__item-wrapper--CbVBD'
+      likeBtn.className = 'call-to-action--PEidl call-to-action--is-s--xFu35 comment-actions__item--5xkC3'
       likeBtn.innerHTML = `<svg ${is_liked ? 'style="color: #F47521;"' : ''} class="episode-rate-action__icon--DEMWd" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" data-t="thumbs-up-svg" aria-labelledby="thumbs-up-svg" aria-hidden="true" role="img"><title id="thumbs-up-svg">Like this</title><path d="M7 20h12v-4c0-.155.036-.309.105-.447l1.33-2.658c.28-.561.28-1.229 0-1.79L19.382 9H14a1 1 0 0 1-1-1V4c0-1.103-.897-2-2-2h-1v4.879a3.973 3.973 0 0 1-1.172 2.828l-.021.021L7 11.432V20zm12 2H6a1 1 0 0 1-1-1V11a1 1 0 0 1 .314-.728l2.109-1.989C7.795 7.906 8 7.408 8 6.879V1a1 1 0 0 1 1-1h2c2.206 0 4 1.794 4 4v3h4.382c.764 0 1.449.424 1.789 1.106l1.053 2.105a4.02 4.02 0 0 1 0 3.578L21 16.236V20c0 1.103-.897 2-2 2zm-17-.063a1 1 0 0 1-1-1V11a1 1 0 0 1 2 0v9.938a1 1 0 0 1-1 1z"></path></svg> ${likes || 0}`
       const dislikeEl = document.createElement('li')
       const dislikeBtn = document.createElement('button')
-      dislikeEl.className = "comment-actions__item-wrapper--CbVBD"
-      dislikeBtn.className = "call-to-action--PEidl call-to-action--is-s--xFu35 comment-actions__item--5xkC3"
+      dislikeEl.className = 'comment-actions__item-wrapper--CbVBD'
+      dislikeBtn.className = 'call-to-action--PEidl call-to-action--is-s--xFu35 comment-actions__item--5xkC3'
       dislikeBtn.innerHTML = `<svg style="transform: rotate(180deg);${is_disliked ? 'color: #F47521;' : ''}" class="episode-rate-action__icon--DEMWd" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" data-t="thumbs-up-svg" aria-labelledby="thumbs-up-svg" aria-hidden="true" role="img"><title id="thumbs-up-svg">Like this</title><path d="M7 20h12v-4c0-.155.036-.309.105-.447l1.33-2.658c.28-.561.28-1.229 0-1.79L19.382 9H14a1 1 0 0 1-1-1V4c0-1.103-.897-2-2-2h-1v4.879a3.973 3.973 0 0 1-1.172 2.828l-.021.021L7 11.432V20zm12 2H6a1 1 0 0 1-1-1V11a1 1 0 0 1 .314-.728l2.109-1.989C7.795 7.906 8 7.408 8 6.879V1a1 1 0 0 1 1-1h2c2.206 0 4 1.794 4 4v3h4.382c.764 0 1.449.424 1.789 1.106l1.053 2.105a4.02 4.02 0 0 1 0 3.578L21 16.236V20c0 1.103-.897 2-2 2zm-17-.063a1 1 0 0 1-1-1V11a1 1 0 0 1 2 0v9.938a1 1 0 0 1-1 1z"></path></svg> ${dislikes || 0}`
       commentSignature.className = 'comment__signature--ViT7H'
       commentBody.className = 'comment__body--PmW4R'
@@ -237,7 +237,7 @@
 
 // innerDivContent.append(commentSignature)
       innerDivContent.append(commentBody)
-    innerDivContent.append(commentActions)
+      innerDivContent.append(commentActions)
       innerDiv.append(avatar)
       innerDiv.append(innerDivContent)
       commentDetails.append(innerDiv)
@@ -248,40 +248,40 @@
     // setTimeout(async () => {
 // const urlParams = new URLSearchParams(location.search)
 // if(!url.pathname.includes('/watch/')) return;
-      div.className = 'commenting-wrapper'
-      const innerDiv = document.createElement('div') // inner div cus yes
-      const commentSectionDiv = document.createElement('div')
-      const commentsHeader = document.createElement('div')
-      const commentsCount = document.createElement('h5')
-      commentsCount.className = 'heading--nKNOf heading--is-xxs--1CKSn heading--is-family-type-one--GqBzU comments-count'
-      commentsCount.innerText = '{comments_count} Comments'.replace('{comments_count}', ep_data.length)
-      commentsHeader.className = 'comments-header'
-      commentsHeader.appendChild(commentsCount)
-      commentSectionDiv.className = 'erc-commenting-section'
+    div.className = 'commenting-wrapper'
+    const innerDiv = document.createElement('div') // inner div cus yes
+    const commentSectionDiv = document.createElement('div')
+    const commentsHeader = document.createElement('div')
+    const commentsCount = document.createElement('h5')
+    commentsCount.className = 'heading--nKNOf heading--is-xxs--1CKSn heading--is-family-type-one--GqBzU comments-count'
+    commentsCount.innerText = '{comments_count} Comments'.replace('{comments_count}', ep_data.length)
+    commentsHeader.className = 'comments-header'
+    commentsHeader.appendChild(commentsCount)
+    commentSectionDiv.className = 'erc-commenting-section'
 
-      if (!userId) {
-        const notLoggedInc = document.createElement('div')
-        notLoggedInc.className = 'erc-anonymous-info-box anonymous-info-box'
-        notLoggedInc.innerHTML = notLoggedIn
-        commentSectionDiv.append(notLoggedInc)
-      } else {
-        const LoggedInc = document.createElement('div')
-        LoggedInc.className = 'erc-anonymous-info-box anonymous-info-box'
+    if (!userId) {
+      const notLoggedInc = document.createElement('div')
+      notLoggedInc.className = 'erc-anonymous-info-box anonymous-info-box'
+      notLoggedInc.innerHTML = notLoggedIn
+      commentSectionDiv.append(notLoggedInc)
+    } else {
+      const LoggedInc = document.createElement('div')
+      LoggedInc.className = 'erc-anonymous-info-box anonymous-info-box'
     // LoggedInc.innerHTML =
-        createSubmitPage(LoggedInc)
-        commentSectionDiv.append(LoggedInc)
-      }
-      const [commentWrapper, addCommentsToMe] = createCommentWrapper()
-      if (ep_data.length == 0) {
-        const div = document.createElement('div')
-        div.className = ''
-        div.innerText = `Looks like theres no comments `
-        addCommentsToMe.append(div)
-      } else {
-        const safeModeQ = await instance.storage.sync.get('safeMode').then(v => v.safeMode)
-        if (safeModeQ) {
-          console.log('safe mode enabled')
-          await Promise.all(ep_data
+      createSubmitPage(LoggedInc)
+      commentSectionDiv.append(LoggedInc)
+    }
+    const [commentWrapper, addCommentsToMe] = createCommentWrapper()
+    if (ep_data.length == 0) {
+      const div = document.createElement('div')
+      div.className = ''
+      div.innerText = `Looks like theres no comments `
+      addCommentsToMe.append(div)
+    } else {
+      const safeModeQ = await instance.storage.sync.get('safeMode').then(v => v.safeMode)
+      if (safeModeQ) {
+        console.log('safe mode enabled')
+        await Promise.all(ep_data
         .map(async e => {
           return {
             ...e,
@@ -295,12 +295,12 @@
             addCommentsToMe.append(createCommentEl(e))
           })
         })
-        } else {
-          ep_data.forEach(e => {
-            addCommentsToMe.append(createCommentEl(e))
-          })
-        }
+      } else {
+        ep_data.forEach(e => {
+          addCommentsToMe.append(createCommentEl(e))
+        })
       }
+    }
 // addCommentsToMe.append(createCommentEl(EXAMPLE_MESSAGE_PAYLOAD_GEN()))
 // addCommentsToMe.append(createCommentEl(EXAMPLE_MESSAGE_PAYLOAD_GEN()))
 // addCommentsToMe.append(createCommentEl(EXAMPLE_MESSAGE_PAYLOAD_GEN()))
@@ -308,32 +308,31 @@
 // addCommentsToMe.append(createCommentEl(EXAMPLE_MESSAGE_PAYLOAD_GEN()))
 // addCommentsToMe.append(createCommentEl(EXAMPLE_MESSAGE_PAYLOAD_GEN()))
 // addCommentsToMe.append(createCommentEl(EXAMPLE_MESSAGE_PAYLOAD_GEN()))
-      commentSectionDiv.append(commentsHeader)
-      commentSectionDiv.append(commentWrapper)
-      innerDiv.append(commentSectionDiv)
-      div.append(innerDiv)
+    commentSectionDiv.append(commentsHeader)
+    commentSectionDiv.append(commentWrapper)
+    innerDiv.append(commentSectionDiv)
+    div.append(innerDiv)
 // console.log(parent)
-      
+
     // }, 0)
-  } 
+  }
   let last_url = location.href.toString()
   setInterval(() => {
     let urlWasChanged = location.href !== last_url
-if(document.getElementsByClassName('commenting-wrapper')[0] && urlWasChanged) {
-  last_url = location.href.toString()
-  div.innerHTML = ""
-try {
-  document.getElementsByClassName('commenting-wrapper')[0].remove()
-} catch(e){}
-  runSystem()
-}else {
-  const parent = document.getElementsByClassName('body-wrapper')[0]
-    if (!parent) return
-    if (parent && !document.getElementsByClassName('commenting-wrapper')[0]) {
-      parent.append(div)
+    if (document.getElementsByClassName('commenting-wrapper')[0] && urlWasChanged) {
+      last_url = location.href.toString()
+      div.innerHTML = ''
+      try {
+        document.getElementsByClassName('commenting-wrapper')[0].remove()
+      } catch (e) {}
+      runSystem()
+    } else {
+      const parent = document.getElementsByClassName('body-wrapper')[0]
+      if (!parent) return
+      if (parent && !document.getElementsByClassName('commenting-wrapper')[0]) {
+        parent.append(div)
+      }
     }
-}
-  
   }, 20)
   runSystem()
 })()
