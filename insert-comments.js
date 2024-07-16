@@ -179,7 +179,7 @@
           body: JSON.stringify({
             user_data: info, content: textarea.value
           })
-        }).then(r => r.text()).then(alert)
+        }).then(r => r.json()).then(({ message, errors}) => alert(message.includes('NEW') ? `Message sent!` : `${message}${errors ? '\n'+errors.join('\n') : ''}`))
       }
       div.append(h3)
       div.append(textarea)

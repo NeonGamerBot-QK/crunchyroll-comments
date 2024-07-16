@@ -14,7 +14,7 @@ This is still a WIP and more features are on the way.
 - delete comment
 - Reporting a Comment
 - ~~Custom comment badges~~
-- comment automoderation (malicous viruses, spam, etc)
+- ~~comment automoderation (malicous viruses, spam, etc)~~ 
 - ~~safe mode (client size only filter)~~ (included in v0.1.0)
 - ~~Episode syntax highlighting (ex: 00:01 jumps you to the first second of the video) (maybe comming)~~ (included in v0.1.0)
 
