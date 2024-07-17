@@ -7,16 +7,16 @@ This is still a WIP and more features are on the way.
 
 ## More features
 - Reviews (most likely in v1.0.0)
-- Replying to a comment
-- ~~liking a comment~~ (included in v0.1.0)
-- ~~Disliking a comment (in prog)~~ (included in v0.1.0)
-- ~~edit comment~~ (included in v0.1.0)
-- ~~delete comment~~ (included in v0.1.0)
+- Replying to a comment (after v0.1.5)
+- ~~liking a comment~~ (included in v0.0.5)
+- ~~Disliking a comment (in prog)~~ (included in v0.0.5)
+- ~~edit comment~~ (included in v0.0.5)
+- ~~delete comment~~ (included in v0.0.5)
 - ~~Reporting a Comment~~
-- ~~Custom comment badges~~ (included in v0.1.0)
-- ~~comment automoderation (malicous viruses, spam, etc)~~ (included in v0.1.0)
-- ~~safe mode (client size only filter)~~ (being moved to server side) (included in v0.1.0)
-- ~~Episode syntax highlighting (ex: 00:01 jumps you to the first second of the video) (maybe comming)~~ (included in v0.1.0)
+- ~~Custom comment badges~~ (included in v0.0.5)
+- ~~comment automoderation (malicous viruses, spam, etc)~~ (included in v0.0.5)
+- ~~safe mode (client size only filter)~~ (being moved to server side) (included in v0.0.5 (client side version))
+- ~~Episode syntax highlighting (ex: 00:01 jumps you to the first second of the video) (maybe comming)~~ (included in v0.0.5)
 
 ## Helpful links
 [Reddit post about removal of comments](https://www.reddit.com/r/Crunchyroll/comments/1dy380k/crunchyroll_removing_comments_reviews_etc/?utm_name=web3xcss)
