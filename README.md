@@ -9,9 +9,9 @@ This is still a WIP and more features are on the way.
 - Reviews (most likely in v1.0.0)
 - Replying to a comment
 - ~~liking a comment~~
-- Disliking a comment (in prog)
-- edit comment
-- delete comment
+- ~~Disliking a comment (in prog)~~
+- ~~edit comment~~
+- ~~delete comment~~
 - Reporting a Comment
 - ~~Custom comment badges~~
 - ~~comment automoderation (malicous viruses, spam, etc)~~ 

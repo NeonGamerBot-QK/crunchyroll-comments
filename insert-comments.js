@@ -191,7 +191,9 @@
       parent.append(div)
     }
     function createCommentEl (payload = EXAMPLE_MESSAGE_PAYLOAD_GEN()) {
-      let { user_data, content, created_at, badges, is_liked, likes, dislikes, has_disliked, id, has_liked } = payload
+      let { user_data, content, created_at, badges, is_liked, likes, dislikes, has_disliked, id, has_liked, is_mine } = payload
+      if(!badges) badges = []
+      if(payload.updated_at && payload.created_at !== payload.updated_at) badges = [{ name: "EDITED"}, ...badges]
       console.log(payload)
       const commentDiv = document.createElement('div')
       commentDiv.className = 'comment-wrapper'
@@ -211,8 +213,8 @@
       const likeBtn = document.createElement('button')
       likeEl.className = 'comment-actions__item-wrapper--CbVBD'
       likeBtn.className = 'call-to-action--PEidl call-to-action--is-s--xFu35 comment-actions__item--5xkC3'
-      if (has_liked) likeBtn.style.color = '#F47521'
-      likeBtn.innerHTML = `<svg ${has_liked ? 'style="color: #F47521 !important;" stroke="#F47521" fill="#F47521"' : ''} class="episode-rate-action__icon--DEMWd" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" data-t="thumbs-up-svg" aria-labelledby="thumbs-up-svg" aria-hidden="true" role="img"><title id="thumbs-up-svg">Like this</title><path d="M7 20h12v-4c0-.155.036-.309.105-.447l1.33-2.658c.28-.561.28-1.229 0-1.79L19.382 9H14a1 1 0 0 1-1-1V4c0-1.103-.897-2-2-2h-1v4.879a3.973 3.973 0 0 1-1.172 2.828l-.021.021L7 11.432V20zm12 2H6a1 1 0 0 1-1-1V11a1 1 0 0 1 .314-.728l2.109-1.989C7.795 7.906 8 7.408 8 6.879V1a1 1 0 0 1 1-1h2c2.206 0 4 1.794 4 4v3h4.382c.764 0 1.449.424 1.789 1.106l1.053 2.105a4.02 4.02 0 0 1 0 3.578L21 16.236V20c0 1.103-.897 2-2 2zm-17-.063a1 1 0 0 1-1-1V11a1 1 0 0 1 2 0v9.938a1 1 0 0 1-1 1z"></path></svg> ${likes || 0}`
+      // if (has_liked) likeBtn.style.color = '#F47521'
+      likeBtn.innerHTML = `<svg ${has_liked ? 'style="color: #F47521 !important;fill: #F47521 !important;stroke: #F47521 !important;"' : ''} class="episode-rate-action__icon--DEMWd" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" data-t="thumbs-up-svg" aria-labelledby="thumbs-up-svg" aria-hidden="true" role="img"><title id="thumbs-up-svg">Like this</title><path d="M7 20h12v-4c0-.155.036-.309.105-.447l1.33-2.658c.28-.561.28-1.229 0-1.79L19.382 9H14a1 1 0 0 1-1-1V4c0-1.103-.897-2-2-2h-1v4.879a3.973 3.973 0 0 1-1.172 2.828l-.021.021L7 11.432V20zm12 2H6a1 1 0 0 1-1-1V11a1 1 0 0 1 .314-.728l2.109-1.989C7.795 7.906 8 7.408 8 6.879V1a1 1 0 0 1 1-1h2c2.206 0 4 1.794 4 4v3h4.382c.764 0 1.449.424 1.789 1.106l1.053 2.105a4.02 4.02 0 0 1 0 3.578L21 16.236V20c0 1.103-.897 2-2 2zm-17-.063a1 1 0 0 1-1-1V11a1 1 0 0 1 2 0v9.938a1 1 0 0 1-1 1z"></path></svg> ${likes || 0}`
       likeBtn.onclick = () => {
         // fetch('https:/')
         fetch(`https://api.saahild.com/api/crunchyroll/comments/${ep_id}/${ep_name}/${id || created_at}/like`, {
@@ -226,20 +228,26 @@
           let n_likes = n_has_liked ? likes + 1 : likes - 1
           if (has_liked) {
             likeBtn.style.color = ''
-            likeBtn.innerHTML = `<svg ${n_has_liked ? 'style="color: #F47521 !important;" stroke="#F47521" fill="#F47521"' : ''} class="episode-rate-action__icon--DEMWd" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" data-t="thumbs-up-svg" aria-labelledby="thumbs-up-svg" aria-hidden="true" role="img"><title id="thumbs-up-svg">Like this</title><path d="M7 20h12v-4c0-.155.036-.309.105-.447l1.33-2.658c.28-.561.28-1.229 0-1.79L19.382 9H14a1 1 0 0 1-1-1V4c0-1.103-.897-2-2-2h-1v4.879a3.973 3.973 0 0 1-1.172 2.828l-.021.021L7 11.432V20zm12 2H6a1 1 0 0 1-1-1V11a1 1 0 0 1 .314-.728l2.109-1.989C7.795 7.906 8 7.408 8 6.879V1a1 1 0 0 1 1-1h2c2.206 0 4 1.794 4 4v3h4.382c.764 0 1.449.424 1.789 1.106l1.053 2.105a4.02 4.02 0 0 1 0 3.578L21 16.236V20c0 1.103-.897 2-2 2zm-17-.063a1 1 0 0 1-1-1V11a1 1 0 0 1 2 0v9.938a1 1 0 0 1-1 1z"></path></svg> ${(n_likes || 0)}`
+            likeBtn.innerHTML = `<svg ${n_has_liked ? 'style="color: #F47521 !important;fill: #F47521 !important;stroke: #F47521 !important;"' : ''} class="episode-rate-action__icon--DEMWd" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" data-t="thumbs-up-svg" aria-labelledby="thumbs-up-svg" aria-hidden="true" role="img"><title id="thumbs-up-svg">Like this</title><path d="M7 20h12v-4c0-.155.036-.309.105-.447l1.33-2.658c.28-.561.28-1.229 0-1.79L19.382 9H14a1 1 0 0 1-1-1V4c0-1.103-.897-2-2-2h-1v4.879a3.973 3.973 0 0 1-1.172 2.828l-.021.021L7 11.432V20zm12 2H6a1 1 0 0 1-1-1V11a1 1 0 0 1 .314-.728l2.109-1.989C7.795 7.906 8 7.408 8 6.879V1a1 1 0 0 1 1-1h2c2.206 0 4 1.794 4 4v3h4.382c.764 0 1.449.424 1.789 1.106l1.053 2.105a4.02 4.02 0 0 1 0 3.578L21 16.236V20c0 1.103-.897 2-2 2zm-17-.063a1 1 0 0 1-1-1V11a1 1 0 0 1 2 0v9.938a1 1 0 0 1-1 1z"></path></svg> ${(n_likes || 0)}`
           } else {
             likeBtn.style.color = '#F47521'
-            likeBtn.innerHTML = `<svg ${n_has_liked ? 'style="color: #F47521 !important;" stroke="#F47521" fill="#F47521"' : ''} class="episode-rate-action__icon--DEMWd" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" data-t="thumbs-up-svg" aria-labelledby="thumbs-up-svg" aria-hidden="true" role="img"><title id="thumbs-up-svg">Like this</title><path d="M7 20h12v-4c0-.155.036-.309.105-.447l1.33-2.658c.28-.561.28-1.229 0-1.79L19.382 9H14a1 1 0 0 1-1-1V4c0-1.103-.897-2-2-2h-1v4.879a3.973 3.973 0 0 1-1.172 2.828l-.021.021L7 11.432V20zm12 2H6a1 1 0 0 1-1-1V11a1 1 0 0 1 .314-.728l2.109-1.989C7.795 7.906 8 7.408 8 6.879V1a1 1 0 0 1 1-1h2c2.206 0 4 1.794 4 4v3h4.382c.764 0 1.449.424 1.789 1.106l1.053 2.105a4.02 4.02 0 0 1 0 3.578L21 16.236V20c0 1.103-.897 2-2 2zm-17-.063a1 1 0 0 1-1-1V11a1 1 0 0 1 2 0v9.938a1 1 0 0 1-1 1z"></path></svg> ${(n_likes || 0)}`
+            likeBtn.innerHTML = `<svg ${n_has_liked ? 'style="color: #F47521 !important;fill: #F47521 !important;stroke: #F47521 !important;"' : ''} class="episode-rate-action__icon--DEMWd" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" data-t="thumbs-up-svg" aria-labelledby="thumbs-up-svg" aria-hidden="true" role="img"><title id="thumbs-up-svg">Like this</title><path d="M7 20h12v-4c0-.155.036-.309.105-.447l1.33-2.658c.28-.561.28-1.229 0-1.79L19.382 9H14a1 1 0 0 1-1-1V4c0-1.103-.897-2-2-2h-1v4.879a3.973 3.973 0 0 1-1.172 2.828l-.021.021L7 11.432V20zm12 2H6a1 1 0 0 1-1-1V11a1 1 0 0 1 .314-.728l2.109-1.989C7.795 7.906 8 7.408 8 6.879V1a1 1 0 0 1 1-1h2c2.206 0 4 1.794 4 4v3h4.382c.764 0 1.449.424 1.789 1.106l1.053 2.105a4.02 4.02 0 0 1 0 3.578L21 16.236V20c0 1.103-.897 2-2 2zm-17-.063a1 1 0 0 1-1-1V11a1 1 0 0 1 2 0v9.938a1 1 0 0 1-1 1z"></path></svg> ${(n_likes || 0)}`
           }
           has_liked = n_has_liked
           likes = n_likes
         })
       }
+      const editSvg = `<svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="24" height="24" class="episode-rate-action__icon--DEMWd" viewBox="0 0 24 24">
+    <path d="M 18.414062 2 C 18.158062 2 17.902031 2.0979687 17.707031 2.2929688 L 15.707031 4.2929688 L 14.292969 5.7070312 L 3 17 L 3 21 L 7 21 L 21.707031 6.2929688 C 22.098031 5.9019687 22.098031 5.2689063 21.707031 4.8789062 L 19.121094 2.2929688 C 18.926094 2.0979687 18.670063 2 18.414062 2 z M 18.414062 4.4140625 L 19.585938 5.5859375 L 18.292969 6.8789062 L 17.121094 5.7070312 L 18.414062 4.4140625 z M 15.707031 7.1210938 L 16.878906 8.2929688 L 6.171875 19 L 5 19 L 5 17.828125 L 15.707031 7.1210938 z"></path>
+</svg>`
+const delSvg = `<svg xmlns="http://www.w3.org/2000/svg" class="episode-rate-action__icon--DEMWd" x="0px" y="0px" width="48" height="48" viewBox="0 0 48 48">
+<path d="M 20.5 4 A 1.50015 1.50015 0 0 0 19.066406 6 L 14.640625 6 C 12.803372 6 11.082924 6.9194511 10.064453 8.4492188 L 7.6972656 12 L 7.5 12 A 1.50015 1.50015 0 1 0 7.5 15 L 8.2636719 15 A 1.50015 1.50015 0 0 0 8.6523438 15.007812 L 11.125 38.085938 C 11.423352 40.868277 13.795836 43 16.59375 43 L 31.404297 43 C 34.202211 43 36.574695 40.868277 36.873047 38.085938 L 39.347656 15.007812 A 1.50015 1.50015 0 0 0 39.728516 15 L 40.5 15 A 1.50015 1.50015 0 1 0 40.5 12 L 40.302734 12 L 37.935547 8.4492188 C 36.916254 6.9202798 35.196001 6 33.359375 6 L 28.933594 6 A 1.50015 1.50015 0 0 0 27.5 4 L 20.5 4 z M 14.640625 9 L 33.359375 9 C 34.196749 9 34.974746 9.4162203 35.439453 10.113281 L 36.697266 12 L 11.302734 12 L 12.560547 10.113281 A 1.50015 1.50015 0 0 0 12.5625 10.111328 C 13.025982 9.4151428 13.801878 9 14.640625 9 z M 11.669922 15 L 36.330078 15 L 33.890625 37.765625 C 33.752977 39.049286 32.694383 40 31.404297 40 L 16.59375 40 C 15.303664 40 14.247023 39.049286 14.109375 37.765625 L 11.669922 15 z"></path>
+</svg>`
       const dislikeEl = document.createElement('li')
       const dislikeBtn = document.createElement('button')
       dislikeEl.className = 'comment-actions__item-wrapper--CbVBD'
       dislikeBtn.className = 'call-to-action--PEidl call-to-action--is-s--xFu35 comment-actions__item--5xkC3'
-      dislikeBtn.innerHTML = `<svg style="transform: rotate(180deg);${has_disliked ? 'color: #F47521;' : ''}" class="episode-rate-action__icon--DEMWd" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" data-t="thumbs-up-svg" aria-labelledby="thumbs-up-svg" aria-hidden="true" role="img"><title id="thumbs-up-svg">Like this</title><path d="M7 20h12v-4c0-.155.036-.309.105-.447l1.33-2.658c.28-.561.28-1.229 0-1.79L19.382 9H14a1 1 0 0 1-1-1V4c0-1.103-.897-2-2-2h-1v4.879a3.973 3.973 0 0 1-1.172 2.828l-.021.021L7 11.432V20zm12 2H6a1 1 0 0 1-1-1V11a1 1 0 0 1 .314-.728l2.109-1.989C7.795 7.906 8 7.408 8 6.879V1a1 1 0 0 1 1-1h2c2.206 0 4 1.794 4 4v3h4.382c.764 0 1.449.424 1.789 1.106l1.053 2.105a4.02 4.02 0 0 1 0 3.578L21 16.236V20c0 1.103-.897 2-2 2zm-17-.063a1 1 0 0 1-1-1V11a1 1 0 0 1 2 0v9.938a1 1 0 0 1-1 1z"></path></svg> ${dislikes || 0}`
+      dislikeBtn.innerHTML = `<svg style="transform: rotate(180deg);${has_disliked ? 'fill: #F47521 !important;stroke: #F47521 !important;' : ''}" class="episode-rate-action__icon--DEMWd" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" data-t="thumbs-up-svg" aria-labelledby="thumbs-up-svg" aria-hidden="true" role="img"><title id="thumbs-up-svg">Like this</title><path d="M7 20h12v-4c0-.155.036-.309.105-.447l1.33-2.658c.28-.561.28-1.229 0-1.79L19.382 9H14a1 1 0 0 1-1-1V4c0-1.103-.897-2-2-2h-1v4.879a3.973 3.973 0 0 1-1.172 2.828l-.021.021L7 11.432V20zm12 2H6a1 1 0 0 1-1-1V11a1 1 0 0 1 .314-.728l2.109-1.989C7.795 7.906 8 7.408 8 6.879V1a1 1 0 0 1 1-1h2c2.206 0 4 1.794 4 4v3h4.382c.764 0 1.449.424 1.789 1.106l1.053 2.105a4.02 4.02 0 0 1 0 3.578L21 16.236V20c0 1.103-.897 2-2 2zm-17-.063a1 1 0 0 1-1-1V11a1 1 0 0 1 2 0v9.938a1 1 0 0 1-1 1z"></path></svg> ${dislikes || 0}`
       dislikeBtn.onclick = () => {
         // fetch('https:/')
         fetch(`https://api.saahild.com/api/crunchyroll/comments/${ep_id}/${ep_name}/${id || created_at}/dislike`, {
@@ -249,18 +257,66 @@
             'x-user-id': userId
           }
         }).then(r => r.json()).then(({ message }) => {
-          let n_has_liked = !has_disliked
-          let n_likes = n_has_liked ? dislikes + 1 : likes - 1
-          if (has_liked) {
+          let n_has_disliked = !has_disliked
+          let n_likes = n_has_disliked ? dislikes + 1 : dislikes - 1
+          if (has_disliked) {
             dislikeBtn.style.color = ''
           } else {
-            dislikeBtn.style.color = '#F47521'
+            dislikeBtn.style.color = '#F47521 !importent'
           }
-          dislikeBtn.innerHTML = `<svg style="transform: rotate(180deg);${has_disliked ? 'color: #F47521;' : ''}" class="episode-rate-action__icon--DEMWd" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" data-t="thumbs-up-svg" aria-labelledby="thumbs-up-svg" aria-hidden="true" role="img"><title id="thumbs-up-svg">Like this</title><path d="M7 20h12v-4c0-.155.036-.309.105-.447l1.33-2.658c.28-.561.28-1.229 0-1.79L19.382 9H14a1 1 0 0 1-1-1V4c0-1.103-.897-2-2-2h-1v4.879a3.973 3.973 0 0 1-1.172 2.828l-.021.021L7 11.432V20zm12 2H6a1 1 0 0 1-1-1V11a1 1 0 0 1 .314-.728l2.109-1.989C7.795 7.906 8 7.408 8 6.879V1a1 1 0 0 1 1-1h2c2.206 0 4 1.794 4 4v3h4.382c.764 0 1.449.424 1.789 1.106l1.053 2.105a4.02 4.02 0 0 1 0 3.578L21 16.236V20c0 1.103-.897 2-2 2zm-17-.063a1 1 0 0 1-1-1V11a1 1 0 0 1 2 0v9.938a1 1 0 0 1-1 1z"></path></svg> ${n_likes || 0}`
-          has_disliked = n_has_liked
+          dislikeBtn.innerHTML = `<svg style="transform: rotate(180deg);${n_has_disliked ? 'fill: #F47521 !important;stroke: #F47521 !important;' : ''}" class="episode-rate-action__icon--DEMWd" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" data-t="thumbs-up-svg" aria-labelledby="thumbs-up-svg" aria-hidden="true" role="img"><title id="thumbs-up-svg">Like this</title><path d="M7 20h12v-4c0-.155.036-.309.105-.447l1.33-2.658c.28-.561.28-1.229 0-1.79L19.382 9H14a1 1 0 0 1-1-1V4c0-1.103-.897-2-2-2h-1v4.879a3.973 3.973 0 0 1-1.172 2.828l-.021.021L7 11.432V20zm12 2H6a1 1 0 0 1-1-1V11a1 1 0 0 1 .314-.728l2.109-1.989C7.795 7.906 8 7.408 8 6.879V1a1 1 0 0 1 1-1h2c2.206 0 4 1.794 4 4v3h4.382c.764 0 1.449.424 1.789 1.106l1.053 2.105a4.02 4.02 0 0 1 0 3.578L21 16.236V20c0 1.103-.897 2-2 2zm-17-.063a1 1 0 0 1-1-1V11a1 1 0 0 1 2 0v9.938a1 1 0 0 1-1 1z"></path></svg> ${n_likes || 0}`
+          has_disliked = n_has_disliked
           dislikes = n_likes
         })
       }
+      const editEl = document.createElement('li')
+      editEl.className = 'comment-actions__item-wrapper--CbVBD'
+      const editBtn = document.createElement('button')
+      editBtn.className = 'call-to-action--PEidl call-to-action--is-s--xFu35 comment-actions__item--5xkC3'
+      editBtn.innerHTML = `${editSvg} Edit`
+      editBtn.onclick = () => {
+        const newContent = prompt(`New Message (IK THE UI IS BAD ITS BETA)`)
+        // console.log(newContent)
+         fetch(`https://api.saahild.com/api/crunchyroll/comments/${ep_id}/${ep_name}/${id || created_at}`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'x-user-id': userId
+          },
+          body: JSON.stringify({
+           content: newContent
+          })
+        }).then(r => r.json()).then(({ message, errors}) => {
+          commentBody.innerHTML = ""
+        createCommentBody(commentBody, newContent)
+          alert(`Message Edited!`)
+        })
+      } 
+      editEl.append(editBtn)
+         const deleteEl = document.createElement('li')
+         deleteEl.className = 'comment-actions__item-wrapper--CbVBD'
+      const deleteBtn = document.createElement('button')
+      deleteBtn.className = 'call-to-action--PEidl call-to-action--is-s--xFu35 comment-actions__item--5xkC3'
+      deleteBtn.innerHTML = `${delSvg}`
+      deleteBtn.onclick = () => {
+const conf = confirm(`Are you sure you want to delete this!`)
+if(conf) {
+  // ...
+  fetch(`https://api.saahild.com/api/crunchyroll/comments/${ep_id}/${ep_name}/${id || created_at}`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+      'x-user-id': userId
+    }
+  }).then(r => r.json()).then(({ message, errors}) => {
+  commentDiv.remove()
+    alert(`Message Deleted!`)
+  })
+}
+      } 
+      deleteEl.append(deleteBtn)
+
+      
       commentSignature.className = 'comment__signature--ViT7H'
       commentBody.className = 'comment__body--PmW4R'
 // sig first
@@ -281,8 +337,14 @@
       commentSignature.append(commentDate)
       likeEl.append(likeBtn)
       dislikeEl.append(dislikeBtn)
+
       commentActions.append(likeEl)
       commentActions.append(dislikeEl)
+      if(is_mine) {
+        //... compile all here  
+        commentActions.append(editEl)
+        commentActions.append(deleteEl)
+        }
       innerDivContent.append(commentSignature)
 
 // innerDivContent.append(commentSignature)
