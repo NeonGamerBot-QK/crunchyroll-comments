@@ -8,13 +8,13 @@ This is still a WIP and more features are on the way.
 ## More features
 - Reviews (most likely in v1.0.0)
 - Replying to a comment
-- ~~liking a comment~~
-- ~~Disliking a comment (in prog)~~
-- ~~edit comment~~
-- ~~delete comment~~
-- Reporting a Comment
-- ~~Custom comment badges~~
-- ~~comment automoderation (malicous viruses, spam, etc)~~ 
+- ~~liking a comment~~ (included in v0.1.0)
+- ~~Disliking a comment (in prog)~~ (included in v0.1.0)
+- ~~edit comment~~ (included in v0.1.0)
+- ~~delete comment~~ (included in v0.1.0)
+- ~~Reporting a Comment~~
+- ~~Custom comment badges~~ (included in v0.1.0)
+- ~~comment automoderation (malicous viruses, spam, etc)~~ (included in v0.1.0)
 - ~~safe mode (client size only filter)~~ (being moved to server side) (included in v0.1.0)
 - ~~Episode syntax highlighting (ex: 00:01 jumps you to the first second of the video) (maybe comming)~~ (included in v0.1.0)
 

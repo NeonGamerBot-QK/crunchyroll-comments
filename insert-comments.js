@@ -209,7 +209,11 @@
       const commentBody = document.createElement('div')
       const commentActions = document.createElement('ul')
       commentActions.className = 'comment-actions--jMKiu'
+      const reportEl = document.createElement('li')
+      reportEl.className = 'comment-actions__item-wrapper--CbVBD'
+      reportEl.innerHTML = `<button class="call-to-action--PEidl call-to-action--is-s--xFu35 comment-actions__item--5xkC3" onclick="window.open('mailto:neon@saahild.com?subject=Report%20Message&body=${encodeURIComponent(`[reason to report message]\n\nMessage ID:${id || created_at}\nMy ID: ${localStorage.ajs_user_id}`)}')"><svg class="episode-rate-action__icon--DEMWd" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M96 64c0-17.7-14.3-32-32-32S32 46.3 32 64l0 256c0 17.7 14.3 32 32 32s32-14.3 32-32L96 64zM64 480a40 40 0 1 0 0-80 40 40 0 1 0 0 80z"/></svg> Report</button>`
       const likeEl = document.createElement('li')
+
       const likeBtn = document.createElement('button')
       likeEl.className = 'comment-actions__item-wrapper--CbVBD'
       likeBtn.className = 'call-to-action--PEidl call-to-action--is-s--xFu35 comment-actions__item--5xkC3'
@@ -337,7 +341,7 @@ if(conf) {
       commentSignature.append(commentDate)
       likeEl.append(likeBtn)
       dislikeEl.append(dislikeBtn)
-
+      commentActions.append(reportEl)
       commentActions.append(likeEl)
       commentActions.append(dislikeEl)
       if(is_mine) {
