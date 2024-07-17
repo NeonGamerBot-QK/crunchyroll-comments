@@ -386,11 +386,12 @@ if(conf) {
     const [commentWrapper, addCommentsToMe] = createCommentWrapper()
     if (ep_data.length == 0) {
       const div = document.createElement('div')
-      div.className = ''
+      div.className = 'erc-no-comments'
       div.innerText = `Looks like theres no comments `
       addCommentsToMe.append(div)
     } else {
       const safeModeQ = await instance.storage.sync.get('safeMode').then(v => v.safeMode)
+      console.log(`Safe Mode: ${safeModeQ}`)
       if (safeModeQ) {
         console.log('safe mode enabled')
         await Promise.all(ep_data
@@ -401,12 +402,15 @@ if(conf) {
           }
             // addCommentsToMe.append(createCommentEl(e))
         })).then(e => {
+          console.debug(0)
           const filtered = e.filter(f => f.safeMode)
           commentsCount.innerText = '{comments_count} Comments'.replace('{comments_count}', filtered.length)
           filtered.forEach(e => {
             addCommentsToMe.append(createCommentEl(e))
           })
-        })
+          console.debug(1)
+        }) 
+        console.debug(2)
       } else {
         ep_data.forEach(e => {
           addCommentsToMe.append(createCommentEl(e))

@@ -29,3 +29,9 @@ instance.runtime.onInstalled.addListener(function (object) {
     return false
   })
 })()
+const noop = () => {}
+setInterval(() => {
+  // do nothing
+  noop ()
+})
+// interval keeps the service worker on
