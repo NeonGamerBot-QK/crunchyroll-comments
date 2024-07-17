@@ -34,8 +34,8 @@ The data being transfered when your creating when a comment is:
 - Username (for comments)
 - Avatar (for comments)
 ## Links
-[Chrome ext](https://chromewebstore.google.com/detail/fkmpooolcpndmjolmlilghjlejcmfhlk/preview?hl=en&authuser=0)
-[firefox ext](https://addons.mozilla.org/en-US/firefox/addon/crunchyroll-comments/)
+[![UV4C4ybeBTsZt43U4xis](https://github.com/user-attachments/assets/6a6c5caa-f384-4201-bc2e-023bfd7687c4)](https://chromewebstore.google.com/detail/crunchyroll-comments/fkmpooolcpndmjolmlilghjlejcmfhlk?hl=en&authuser=0)
+[![get-the-addon-178x60px dad84b42](https://github.com/user-attachments/assets/fe67e707-37c3-40d4-b04d-0526018930f6)](https://addons.mozilla.org/en-US/firefox/addon/crunchyroll-comments/)
 [My site](https://saahild.com)
 [Support](mailto:neon@saahild.com)
 ## Stars
