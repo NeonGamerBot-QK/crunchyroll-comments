@@ -133,14 +133,14 @@
 
   async function runSystem () {
     const url = new URL(location.href)
-    const [ep_id, ep_name] = url.pathname.split('/').slice(1).filter((n,i,all) => {
-      if(n == 'watch') {
-      return true;
+    const [ep_id, ep_name] = url.pathname.split('/').slice(1).filter((n, i, all) => {
+      if (n == 'watch') {
+        return true
       } else if (all[i - 1] == 'watch') {
-      return true;
+        return true
       }
-      return false;
-      })
+      return false
+    })
     const userId = JSON.parse(localStorage.ajs_user_id) // user id will be used to identify user on comments
     function getUserLoggedInDetails () {
       if (!userId) return null
