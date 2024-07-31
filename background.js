@@ -1,9 +1,11 @@
 var instance = typeof chrome === 'undefined' ? browser : chrome
 instance.runtime.onInstalled.addListener(function (object) {
-  instance.tabs.create({url: 'https://saahild.com/crunchyroll.html?fi'}, function (tab) {
-    console.log('options page opened')
-  })
-  instance.runtime.setUninstallURL('https://saahild.com/crunchyroll.html')
+  if(object.reason === instance.runtime.OnInstalledReason.INSTALL) {
+    instance.tabs.create({url: 'https://saahild.com/crunchyroll.html?fi'}, function (tab) {
+      console.log('options page opened')
+    })
+  }
+  // instance.runtime.setUninstallURL('https://saahild.com/crunchyroll.html')
   // instance.runtime.openOptionsPage()
 })
 
