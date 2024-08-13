@@ -288,21 +288,11 @@
       editBtn.className = 'call-to-action--PEidl call-to-action--is-s--xFu35 comment-actions__item--5xkC3'
       editBtn.innerHTML = `${editSvg} Edit`
       editBtn.onclick = () => {
+        // if()
         // const newContent = prompt(`New Message (IK THE UI IS BAD ITS BETA)`)
         const textarea = document.createElement('textarea')
-        commentBody.children[0].children[0].innerHTML = ``
-        textarea.className = 'comment-textarea__editable-area--gKhpt'
-        const subBtn = document.createElement('button')
-        subBtn.className = 'button--is-type-one-weak--KLvCX'
-        subBtn.textContent = 'Edit Message'
-        subBtn.style.paddingBottom = '0px !important;'
-        commentBody.children[0].children[0].append(subBtn)
-        commentBody.children[0].children[0].append(textarea)
-
-        commentBody.children[0].children[0].style.display = 'inline-flex;'
-        commentBody.children[0].children[0].style.className = ''
-        subBtn.onclick = () => {
-          let newContent = textarea.value
+        if(commentBody.children[0].querySelector('textarea')?.value) {
+          let newContent = commentBody.children[0].querySelector('textarea')?.value
           console.log(newContent)
           fetch(`https://api.saahild.com/api/crunchyroll/comments/${ep_id}/${ep_name}/${id || created_at}`, {
             method: 'POST',
@@ -318,7 +308,38 @@
             createCommentBody(commentBody, newContent)
             alert(`Message Edited!`)
           })
+        } else {
+          commentBody.children[0].children[0].innerHTML = ``
+          textarea.className = 'comment-textarea__editable-area--gKhpt'
+          const subBtn = document.createElement('button')
+          subBtn.className = 'button--is-type-one-weak--KLvCX'
+          subBtn.textContent = 'Edit Message'
+          subBtn.style.paddingBottom = '0px !important;'
+          // commentBody.children[0].children[0].append(subBtn)
+          commentBody.children[0].children[0].append(textarea)
+  
+          commentBody.children[0].children[0].style.display = 'inline-flex;'
+          commentBody.children[0].children[0].style.className = ''
+          subBtn.onclick = () => {
+            let newContent = textarea.value
+            console.log(newContent)
+            fetch(`https://api.saahild.com/api/crunchyroll/comments/${ep_id}/${ep_name}/${id || created_at}`, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'x-user-id': userId
+              },
+              body: JSON.stringify({
+                content: newContent
+              })
+            }).then(r => r.json()).then(({ message, errors}) => {
+              commentBody.innerHTML = ''
+              createCommentBody(commentBody, newContent)
+              alert(`Message Edited!`)
+            })
+          }
         }
+       
       }
       editEl.append(editBtn)
       const deleteEl = document.createElement('li')
