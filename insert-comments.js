@@ -141,7 +141,8 @@
       }
       return false
     })
-    const userId = (localStorage.ajs_user_id || Object.keys(localStorage).find(e => e.startsWith('ab.storage.userId'))) ? (localStorage.ajs_user_id ? JSON.parse(localStorage.ajs_user_id) : Object.keys(localStorage).find(e => e.startsWith('ab.storage.userId')).split('.')[3]) : null // user id will be used to identify user on comments
+    const userId = (localStorage.ajs_user_id || Object.keys(localStorage).find(e => e.startsWith('ab.storage.userId'))) ? (localStorage.ajs_user_id ? JSON.parse(localStorage.ajs_user_id) : JSON.parse(localStorage[Object.keys(localStorage).find(e => e.startsWith('ab.storage.userId'))]).v.g) : null // user id will be used to identify user on comments
+    console.log(`Using userid: ${userId}`)
     function getUserLoggedInDetails() {
       if (!userId) return null
       const p = document.getElementsByClassName('erc-authenticated-user-menu')[0]
