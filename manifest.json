@@ -39,5 +39,5 @@
   "default_popup": "popup.html"
 },
   "manifest_version": 3,
-  "version": "0.0.6"
+  "version": "0.0.7"
 }
