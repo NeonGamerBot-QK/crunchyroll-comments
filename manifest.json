@@ -1,11 +1,10 @@
 {
-    "name": "Crunchyroll Comments",
-    "description": "An extension which has a 3d party version of Crunchyroll comments #bringbackcrunchyrollcomments",
-    "content_scripts": [
+  "name": "Crunchyroll Comments",
+  "description": "An extension which has a 3d party version of Crunchyroll comments #bringbackcrunchyrollcomments",
+  "content_scripts": [
     {
       "matches": ["*://*.crunchyroll.com/*"],
-      "js": [
-        "insert-comments.js"],
+      "js": ["insert-comments.js"],
       "css": ["custom.css", "comments.css", "comments2.css"],
       "run_at": "document_end",
       "all_frames": true
@@ -18,26 +17,26 @@
     "128": "icons/icon128.png"
   },
   "browser_specific_settings": {
-  "gecko": {
-    "id": "{a6f0a0e4-d631-40e7-8754-06b5eb0d1224}"
-  }
-},
-"options_page": "options.html",
-"options_ui": {
-  "page": "options.html",
-  "open_in_tab": true
-},
-"permissions": ["storage"],
-"background": {
-  "service_worker": "background.js",
-  "scripts": ["background.js"],
-  "type": "module"
-},
-"action": {
-  "default_icon": "icons/icon32.png",
-  "default_title": "Donate",
-  "default_popup": "popup.html"
-},
+    "gecko": {
+      "id": "{a6f0a0e4-d631-40e7-8754-06b5eb0d1224}"
+    }
+  },
+  "options_page": "options.html",
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": true
+  },
+  "permissions": ["storage"],
+  "background": {
+    "service_worker": "background.js",
+    "scripts": ["background.js"],
+    "type": "module"
+  },
+  "action": {
+    "default_icon": "icons/icon32.png",
+    "default_title": "Donate",
+    "default_popup": "popup.html"
+  },
   "manifest_version": 3,
   "version": "0.0.7"
 }
